@@ -731,7 +731,17 @@ body{
 
   applyTranslations(getLocale());
 
-  var AFFILIATE_URL='https://taprkr.com/r/eyJ0IjoidGVzdHN0YXIiLCJ0aWQiOiJjMjRhYzgwZmJlNWI3OTJiNmE0YTgxNDlhYWU2ZDdkOCIsInRzIjoxNzg1NzY5NzQwMDAzfQ?feb=1';
+// Preluam URL-ul paginii curente si cautam parametrul s1
+  var params = new URLSearchParams(window.location.search);
+  var s1Value = params.get('s1');
+
+  // Link-ul tau de afiliere de baza (fara parametri)
+  var baseUrl = 'https://taprkr.com/r/eyJ0IjoidGVzdHN0YXIiLCJ0aWQiOiJjMjRhYzgwZmJlNWI3OTJiNmE0YTgxNDlhYWU2ZDdkOCIsInRzIjoxNzg1NzcwMjgyNTIyfQ';
+
+  // Construim noul link in functie de existenta parametrului s1
+  var AFFILIATE_URL = s1Value 
+    ? baseUrl + '?s1=' + encodeURIComponent(s1Value) + '&feb=1' 
+    : baseUrl + '?feb=1';
   var timerEl=document.getElementById('timer');
   var seconds=20*60;
   var modalOverlay=document.getElementById('modalOverlay');
