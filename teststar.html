@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Get Paid to Play Games &amp; Test Apps</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0c0c0c;
+  --card:#161616;
+  --fg:#f0f0f0;
+  --muted:#888;
+ --primary:#7c4dff;
+  --primary-fg:#000;
+  --border:#252525;
+  --star:#f5c518;
+  --hot:#ff4500;
+  --muted-bg:#1a1a1a;
+}
+
+body{
+  background:var(--bg);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--fg);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{
+  width:100%;
+  max-width:430px;
+  background:linear-gradient(180deg,#0c0c0c 0%,#101010 50%,#0c0c0c 100%);
+  min-height:100vh;
+  padding:24px 16px 130px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+  position:relative;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 0 22px rgba(124,77,255,0.45)}
+  50%{box-shadow:0 0 44px rgba(124,77,255,0.75),0 0 0 6px rgba(124,77,255,0.08)}
+}
+@keyframes logoGlow{
+  0%,100%{box-shadow:0 0 12px rgba(124,77,255,0.35)}
+  50%{box-shadow:0 0 24px rgba(124,77,255,0.65)}
+}
+@keyframes timerTick{0%,49%{opacity:1}50%,99%{opacity:.4}100%{opacity:1}}
+
+.f0{animation:fadeUp .5s ease both 0ms}
+.f1{animation:fadeUp .5s ease both 80ms}
+.f2{animation:fadeUp .5s ease both 160ms}
+.f3{animation:fadeUp .5s ease both 240ms}
+.f4{animation:fadeUp .5s ease both 340ms}
+.f5{animation:fadeUp .5s ease both 440ms}
+.f6{animation:fadeUp .5s ease both 540ms}
+.f7{animation:fadeUp .5s ease both 640ms}
+
+.header{display:flex;align-items:center;justify-content:space-between}
+.logo-wrap{display:flex;align-items:center;gap:8px}
+.logo-img{width:32px;height:32px;border-radius:9px;animation:logoGlow 2.5s ease-in-out infinite;object-fit:cover}
+.logo-name{font-size:18px;font-weight:800;letter-spacing:-0.4px}
+
+.timer{
+  display:flex;align-items:center;gap:5px;
+  border:1px solid var(--border);
+  background:rgba(22,22,22,.7);
+  border-radius:99px;
+  padding:6px 12px;
+}
+.timer svg{width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.timer-label{font-size:11px;color:var(--muted)}
+.timer-time{font-size:11px;font-weight:800;color:var(--fg);animation:timerTick 1s step-end infinite}
+
+.trust-wrap{display:flex;justify-content:center}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid rgba(0,200,79,.28);
+  background:rgba(0,200,79,.09);
+  border-radius:99px;
+  padding:8px 16px;
+}
+.trust-badge svg{width:13px;height:13px;stroke:var(--primary);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.trust-text{font-size:11px;font-weight:600;color:var(--primary)}
+
+.hero{text-align:center;display:flex;flex-direction:column;gap:11px}
+.hero h1{font-size:33px;font-weight:900;line-height:1.14;letter-spacing:-0.5px}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:13px;color:var(--muted);line-height:1.65;padding:0 8px}
+
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  border:1px solid var(--border);
+  background:rgba(22,22,22,.5);
+  border-radius:99px;
+  padding:7px 12px;
+}
+.pill svg{width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pill span{font-size:11px;font-weight:600;color:var(--muted)}
+
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+.offers{display:flex;flex-direction:column;gap:10px}
+.offer-card{
+  display:flex;align-items:center;gap:12px;
+  border:1px solid var(--border);
+  background:rgba(22,22,22,.5);
+  border-radius:16px;
+  padding:14px;
+  cursor:pointer;
+  transition:transform .12s,border-color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.offer-card:active{transform:scale(.975)}
+.offer-card.highlight{border-color:rgba(0,200,79,.38);background:rgba(22,22,22,.72)}
+.offer-img{width:48px;height:48px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.offer-info{flex:1;min-width:0}
+.offer-row{display:flex;align-items:center;gap:8px}
+.offer-name{font-size:14px;font-weight:700}
+.hot-badge{background:var(--hot);border-radius:99px;padding:2px 8px;font-size:10px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:.05em}
+.offer-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.offer-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.offer-price{font-size:16px;font-weight:800;color:var(--primary)}
+.star-row{display:flex;align-items:center;gap:3px}
+.star-row svg{width:11px;height:11px;fill:var(--star)}
+.star-row span{font-size:11px;color:var(--muted)}
+.chevron-icon{width:15px;height:15px;flex-shrink:0;stroke:var(--muted);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.pro-tip{border:1px solid rgba(0,200,79,.22);background:linear-gradient(180deg,var(--card) 0%,#0e0e0e 100%);border-radius:16px;padding:20px;position:relative;overflow:hidden}
+.pro-tip::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--star),var(--hot))}
+.pro-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.pro-left{display:flex;flex-direction:column;gap:9px;flex:1}
+.pro-badge{display:inline-flex;align-items:center;gap:4px;background:var(--muted-bg);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;color:var(--star);width:fit-content}
+.pro-badge svg{width:11px;height:11px;fill:var(--star);stroke:none}
+.pro-title{font-size:18px;font-weight:800;line-height:1.25}.pro-title .y{color:var(--star)}
+.pro-body{font-size:12px;color:var(--muted);line-height:1.6}
+.pro-right{text-align:right;flex-shrink:0;padding-top:32px}
+.pro-amount{font-size:20px;font-weight:800;color:var(--primary)}
+.pro-period{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+
+.how-grid{display:flex;gap:8px}
+.how-card{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;border:1px solid var(--border);background:rgba(22,22,22,.5);border-radius:12px;padding:16px 10px;text-align:center}
+.how-step{font-size:17px;font-weight:800;color:var(--primary)}
+.how-card svg{width:22px;height:22px;stroke:var(--primary);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.how-title{font-size:12px;font-weight:700;color:var(--fg)}
+.how-desc{font-size:11px;color:var(--muted);line-height:1.45}
+
+.rating{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0}
+.stars{display:flex;gap:3px}.stars svg{width:20px;height:20px;fill:var(--star)}
+.rating-text{font-size:13px;color:var(--muted)}.rating-text strong{color:var(--fg);font-weight:700}
+
+.sticky-cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:10px 16px 18px;background:linear-gradient(to top,#0c0c0c 60%,transparent);z-index:40}
+.cta-btn{width:100%;border:none;border-radius:18px;background:var(--primary);color:var(--primary-fg);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:17px;font-weight:800;padding:18px 24px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;animation:ctaPulse 2.5s ease-in-out infinite;-webkit-tap-highlight-color:transparent;transition:transform .1s;letter-spacing:-0.2px}
+.cta-btn:active{transform:scale(.96)}
+.cta-btn svg{width:20px;height:20px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+.modal-overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(12,12,12,.85);backdrop-filter:blur(8px);padding:24px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{width:100%;max-width:360px;background:var(--card);border:1px solid var(--border);border-radius:22px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:scale(.9);transition:transform .2s}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;color:var(--muted);-webkit-tap-highlight-color:transparent;transition:color .15s}
+.modal-close:hover{color:var(--fg)}
+.modal-close svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.modal-eyebrow{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--primary)}
+.modal h2{font-size:21px;font-weight:800;line-height:1.25;letter-spacing:-0.3px}.modal h2 span{color:var(--primary)}
+.modal-body{font-size:13px;color:var(--muted);line-height:1.65}
+.modal-cta{width:100%;border:none;border-radius:14px;background:var(--primary);color:var(--primary-fg);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:15px;font-weight:800;padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 0 30px rgba(0,200,79,.3);-webkit-tap-highlight-color:transparent;transition:transform .1s}
+.modal-cta:active{transform:scale(.97)}
+.modal-cta svg{width:18px;height:18px;stroke:#000;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:399px){.feature-offer,.how-card,.pro-tip{border-radius:16px}.hero h1{font-size:31px}.offer-copy .title-line{font-size:14px}.offer-value .amount{font-size:18px}}
+</style>
+
+<!-- TikTok Pixel Code Start -->
+<script>
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;
+  var ttq=w[t]=w[t]||[];
+  ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+  ttq.setAndDefer=function(t,e){
+    t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))};
+  };
+  for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+  ttq.instance=function(t){
+    for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);
+    return e;
+  };
+  ttq.load=function(e,n){
+    var r="https://analytics.tiktok.com/i18n/pixel/events.js";
+    ttq._i=ttq._i||{};
+    ttq._i[e]=[];
+    ttq._i[e]._u=r;
+    ttq._t=ttq._t||{};
+    ttq._t[e]=+new Date;
+    ttq._o=ttq._o||{};
+    ttq._o[e]=n||{};
+    var s=document.createElement("script");
+    s.type="text/javascript";
+    s.async=!0;
+    s.src=r+"?sdkid="+e+"&lib="+t;
+    var x=document.getElementsByTagName("script")[0];
+    x.parentNode.insertBefore(s,x);
+  };
+
+  ttq.load('D5400U3C77UEGQ0DSFNG');
+  ttq.page();
+}(window, document, 'ttq');
+</script>
+<!-- TikTok Pixel Code End -->
+
+</head>
+<body>
+
+<div class="page">
+  <div class="header f0">
+    <div class="logo-wrap">
+      <img src="assets/teststar.png" alt="FreeCash" class="logo-img"/>
+      <span class="logo-name">TestStar</span>
+    </div>
+    <div class="timer">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span class="timer-label" id="timerLabel">Bonus expires in&nbsp;</span>
+      <span class="timer-time" id="timer">20:00</span>
+    </div>
+  </div>
+
+  <div class="trust-wrap f1">
+    <div class="trust-badge">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      <span class="trust-text" id="trustText">Trusted by 50,000+ users 🌍</span>
+    </div>
+  </div>
+
+  <div class="hero f2">
+    <h1 id="heroTitle">Get paid to Play<br/><span>&amp; test games</span></h1>
+    <p id="heroBody">Turn your screen time into real cash. Join thousands of users earning rewards every single day.</p>
+  </div>
+
+  <div class="pills f3">
+    <div class="pill"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span id="pill1">Instant Payouts</span></div>
+    <div class="pill"><svg viewBox="0 0 24 24"><rect x="6" y="11" width="12" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><line x1="12" y1="15" x2="12" y2="17"/></svg><span id="pill2">100+ Games</span></div>
+    <div class="pill"><svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg><span id="pill3">Daily Bonuses</span></div>
+    <div class="pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span id="pill4">Secure &amp; Trusted</span></div>
+  </div>
+
+  <div class="f4" style="display:flex;flex-direction:column;gap:10px">
+    <span class="section-label" id="topOffersLabel">Top Offers Right Now</span>
+    <div class="offers">
+      <div class="offer-card">
+        <img src="assets/netflix.png?v=2" alt="Netflix" class="offer-img" loading="lazy"/>
+        <div class="offer-info">
+          <div class="offer-row"><span class="offer-name">Netflix</span></div>
+          <p class="offer-sub" id="offer1Sub">Start a free trial month</p>
+        </div>
+        <div class="offer-right">
+          <span class="offer-price">£28</span>
+          <div class="star-row"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>5.0</span></div>
+        </div>
+        <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <div class="offer-card highlight">
+        <img src="assets/block.png" alt="Dice Dreams" class="offer-img" loading="lazy"/>
+        <div class="offer-info">
+          <div class="offer-row"><span class="offer-name">Block Blast</span><span class="hot-badge" id="hotBadge">HOT</span></div>
+          <p class="offer-sub" id="offer2Sub">Test and Reach level 10</p>
+        </div>
+        <div class="offer-right">
+          <span class="offer-price">£128</span>
+          <div class="star-row"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>5.0</span></div>
+        </div>
+        <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+
+      <div class="offer-card">
+        <img src="assets/monopoly.png" alt="Get Paid to Scroll" class="offer-img" loading="lazy"/>
+        <div class="offer-info">
+          <div class="offer-row"><span class="offer-name">Monopoly Go</span></div>
+          <p class="offer-sub" id="offer3Sub">Test & leave a review</p>
+        </div>
+        <div class="offer-right">
+          <span class="offer-price">£72</span>
+          <div class="star-row"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>5.0</span></div>
+        </div>
+        <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-tip f5">
+    <div class="pro-inner">
+      <div class="pro-left">
+        <span class="pro-badge"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg><span id="proBadgeText">PRO TIP</span></span>
+        <div class="pro-title" id="proTitle">Unlock "<span class="y">Higher Payouts</span>"<br/></div>
+        <p class="pro-body" id="proBody">Complete 2–3 starter offers to unlock higher payouts and start earning even more!</p>
+      </div>
+      <div class="pro-right">
+        <div class="pro-amount">+$200–$300</div>
+        <div class="pro-period" id="proPeriod">Per Week</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="f6" style="display:flex;flex-direction:column;gap:10px">
+    <span class="section-label" id="howLabel">How It Works</span>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-step">1</div>
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        <div class="how-title" id="how1Title">Choose an offer</div>
+        <div class="how-desc" id="how1Desc">Pick a starter offer and complete the first step.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-step">2</div>
+        <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+        <div class="how-title" id="how2Title">Complete tasks</div>
+        <div class="how-desc" id="how2Desc">Unlock higher payouts after 2–3 quick tasks.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-step">3</div>
+        <svg viewBox="0 0 24 24"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div class="how-title" id="how3Title">Get paid</div>
+        <div class="how-desc" id="how3Desc">Withdraw rewards with fast payouts once your earnings are available.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rating f7">
+    <div class="stars">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="rating-text" id="ratingText"><strong>4.8/5</strong> from 251k+ reviews</div>
+  </div>
+</div>
+
+<div class="sticky-cta">
+  <button class="cta-btn" id="openModalBtn" type="button">
+    <span id="stickyCtaText">Start Earning Now</span>
+    <svg viewBox="0 0 24 24"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </button>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalBody">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-eyebrow" id="modalEyebrow">Before you go</div>
+    <h2 id="modalTitle">Select <span style="color:var(--primary)">25+</span> when signing up</h2>
+    <p class="modal-body" id="modalBody">This unlocks higher payouts on TestStar.</p>
+    <button class="modal-cta" id="continueBtn" type="button"><span id="continueText">Continue</span><svg viewBox="0 0 24 24"><polyline points="5 12 19 12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  var TRANSLATIONS = {
+    en: {
+      title: 'Get Paid to Play Games & Test Apps',
+      timerLabel: 'Bonus expires in&nbsp;',
+      trustText: 'Trusted by 50,000+ users 🌍',
+      heroTitle: 'Get paid to Play<br/><span>&amp; test games</span>',
+      heroBody: 'Turn your screen time into real cash. Join thousands of users earning rewards every single day.',
+      pill1: 'Instant Payouts',
+      pill2: '100+ Games',
+      pill3: 'Daily Bonuses',
+      pill4: 'Secure &amp; Trusted',
+      topOffersLabel: 'Top Offers Right Now',
+      offer1Sub: 'Start a free trial month',
+      hotBadge: 'HOT',
+      offer2Sub: 'Test and Reach level 10',
+      offer3Sub: 'Test &amp; leave a review',
+      proBadgeText: 'PRO TIP',
+      proTitle: 'Unlock "<span class="y">Higher Payouts</span>"<br/>',
+      proBody: 'Complete 2–3 starter offers to unlock higher payouts and start earning even more!',
+      proPeriod: 'Per Week',
+      howLabel: 'How It Works',
+      how1Title: 'Choose an offer',
+      how1Desc: 'Pick a starter offer and complete the first step.',
+      how2Title: 'Complete tasks',
+      how2Desc: 'Unlock higher payouts after 2–3 quick tasks.',
+      how3Title: 'Get paid',
+      how3Desc: 'Withdraw rewards with fast payouts once your earnings are available.',
+      ratingText: '<strong>4.8/5</strong> from 251k+ reviews',
+      stickyCtaText: 'Start Earning Now',
+      modalEyebrow: 'Before you go',
+      modalTitle: 'Select <span style="color:var(--primary)">25+</span> when signing up',
+      modalBody: 'This unlocks higher payouts on TestStar.',
+      continueText: 'Continue'
+    },
+    it: {
+      title: 'Guadagna giocando e testando app',
+      timerLabel: 'Il bonus scade tra&nbsp;',
+      trustText: 'Scelto da oltre 50.000 utenti 🌍',
+      heroTitle: 'Guadagna giocando<br/><span>e testando giochi</span>',
+      heroBody: 'Trasforma il tempo sullo schermo in denaro reale. Unisciti a migliaia di utenti che ottengono ricompense ogni giorno.',
+      pill1: 'Pagamenti immediati',
+      pill2: '100+ giochi',
+      pill3: 'Bonus giornalieri',
+      pill4: 'Sicuro e affidabile',
+      topOffersLabel: 'Migliori offerte ora',
+      offer1Sub: 'Inizia un mese di prova gratuito',
+      hotBadge: 'HOT',
+      offer2Sub: 'Testa e raggiungi il livello 10',
+      offer3Sub: 'Testa e lascia una recensione',
+      proBadgeText: 'CONSIGLIO',
+      proTitle: 'Sblocca "<span class="y">pagamenti più alti</span>"<br/>',
+      proBody: 'Completa 2–3 offerte iniziali per sbloccare pagamenti più alti e iniziare a guadagnare ancora di più!',
+      proPeriod: 'A settimana',
+      howLabel: 'Come funziona',
+      how1Title: 'Scegli un’offerta',
+      how1Desc: 'Scegli un’offerta iniziale e completa il primo passaggio.',
+      how2Title: 'Completa le attività',
+      how2Desc: 'Sblocca pagamenti più alti dopo 2–3 attività rapide.',
+      how3Title: 'Ricevi il pagamento',
+      how3Desc: 'Ritira le ricompense con pagamenti rapidi quando i tuoi guadagni sono disponibili.',
+      ratingText: '<strong>4.8/5</strong> da oltre 251k recensioni',
+      stickyCtaText: 'Inizia a guadagnare ora',
+      modalEyebrow: 'Prima di continuare',
+      modalTitle: 'Seleziona <span style="color:var(--primary)">25+</span> al momento della registrazione',
+      modalBody: 'Questo sblocca pagamenti più alti su TestStar.',
+      continueText: 'Continua'
+    },
+    es: {
+      title: 'Gana dinero jugando y probando apps',
+      timerLabel: 'El bono caduca en&nbsp;',
+      trustText: 'Con la confianza de más de 50.000 usuarios 🌍',
+      heroTitle: 'Gana dinero jugando<br/><span>y probando juegos</span>',
+      heroBody: 'Convierte tu tiempo frente a la pantalla en dinero real. Únete a miles de usuarios que ganan recompensas cada día.',
+      pill1: 'Pagos instantáneos',
+      pill2: '100+ juegos',
+      pill3: 'Bonos diarios',
+      pill4: 'Seguro y confiable',
+      topOffersLabel: 'Mejores ofertas ahora',
+      offer1Sub: 'Empieza un mes de prueba gratis',
+      hotBadge: 'HOT',
+      offer2Sub: 'Prueba y alcanza el nivel 10',
+      offer3Sub: 'Prueba y deja una reseña',
+      proBadgeText: 'CONSEJO',
+      proTitle: 'Desbloquea "<span class="y">pagos más altos</span>"<br/>',
+      proBody: 'Completa 2–3 ofertas iniciales para desbloquear pagos más altos y empezar a ganar aún más.',
+      proPeriod: 'Por semana',
+      howLabel: 'Cómo funciona',
+      how1Title: 'Elige una oferta',
+      how1Desc: 'Elige una oferta inicial y completa el primer paso.',
+      how2Title: 'Completa tareas',
+      how2Desc: 'Desbloquea pagos más altos después de 2–3 tareas rápidas.',
+      how3Title: 'Recibe tu pago',
+      how3Desc: 'Retira tus recompensas con pagos rápidos cuando tus ganancias estén disponibles.',
+      ratingText: '<strong>4.8/5</strong> de más de 251k reseñas',
+      stickyCtaText: 'Empieza a ganar ahora',
+      modalEyebrow: 'Antes de continuar',
+      modalTitle: 'Selecciona <span style="color:var(--primary)">25+</span> al registrarte',
+      modalBody: 'Esto desbloquea pagos más altos en TestStar.',
+      continueText: 'Continuar'
+    },
+    nl: {
+      title: 'Verdien geld met games spelen en apps testen',
+      timerLabel: 'Bonus verloopt over&nbsp;',
+      trustText: 'Vertrouwd door 50.000+ gebruikers 🌍',
+      heroTitle: 'Verdien geld met spelen<br/><span>en games testen</span>',
+      heroBody: 'Zet je schermtijd om in echt geld. Sluit je aan bij duizenden gebruikers die elke dag beloningen verdienen.',
+      pill1: 'Directe uitbetalingen',
+      pill2: '100+ games',
+      pill3: 'Dagelijkse bonussen',
+      pill4: 'Veilig &amp; vertrouwd',
+      topOffersLabel: 'Topaanbiedingen nu',
+      offer1Sub: 'Start een gratis proefmaand',
+      hotBadge: 'HOT',
+      offer2Sub: 'Test en bereik level 10',
+      offer3Sub: 'Test en laat een review achter',
+      proBadgeText: 'TIP',
+      proTitle: 'Ontgrendel "<span class="y">hogere uitbetalingen</span>"<br/>',
+      proBody: 'Voltooi 2–3 starteraanbiedingen om hogere uitbetalingen te ontgrendelen en nog meer te verdienen!',
+      proPeriod: 'Per week',
+      howLabel: 'Hoe het werkt',
+      how1Title: 'Kies een aanbieding',
+      how1Desc: 'Kies een starteraanbieding en voltooi de eerste stap.',
+      how2Title: 'Voltooi taken',
+      how2Desc: 'Ontgrendel hogere uitbetalingen na 2–3 snelle taken.',
+      how3Title: 'Laat je uitbetalen',
+      how3Desc: 'Neem je beloningen snel op zodra je inkomsten beschikbaar zijn.',
+      ratingText: '<strong>4.8/5</strong> uit 251k+ reviews',
+      stickyCtaText: 'Begin nu met verdienen',
+      modalEyebrow: 'Voordat je doorgaat',
+      modalTitle: 'Selecteer <span style="color:var(--primary)">25+</span> tijdens het aanmelden',
+      modalBody: 'Dit ontgrendelt hogere uitbetalingen op TestStar.',
+      continueText: 'Doorgaan'
+    },
+    fr: {
+      title: 'Gagne de l’argent en jouant et en testant des apps',
+      timerLabel: 'Le bonus expire dans&nbsp;',
+      trustText: 'Approuvé par plus de 50 000 utilisateurs 🌍',
+      heroTitle: 'Gagne de l’argent en jouant<br/><span>et en testant des jeux</span>',
+      heroBody: 'Transforme ton temps d’écran en argent réel. Rejoins des milliers d’utilisateurs qui gagnent des récompenses chaque jour.',
+      pill1: 'Paiements instantanés',
+      pill2: '100+ jeux',
+      pill3: 'Bonus quotidiens',
+      pill4: 'Sécurisé &amp; fiable',
+      topOffersLabel: 'Meilleures offres du moment',
+      offer1Sub: 'Commence un mois d’essai gratuit',
+      hotBadge: 'HOT',
+      offer2Sub: 'Teste et atteins le niveau 10',
+      offer3Sub: 'Teste et laisse un avis',
+      proBadgeText: 'ASTUCE',
+      proTitle: 'Débloque des "<span class="y">paiements plus élevés</span>"<br/>',
+      proBody: 'Complète 2–3 offres de départ pour débloquer des paiements plus élevés et commencer à gagner encore plus !',
+      proPeriod: 'Par semaine',
+      howLabel: 'Comment ça marche',
+      how1Title: 'Choisis une offre',
+      how1Desc: 'Choisis une offre de départ et termine la première étape.',
+      how2Title: 'Complète les tâches',
+      how2Desc: 'Débloque des paiements plus élevés après 2–3 tâches rapides.',
+      how3Title: 'Reçois ton paiement',
+      how3Desc: 'Retire tes récompenses rapidement dès que tes gains sont disponibles.',
+      ratingText: '<strong>4.8/5</strong> d’après plus de 251k avis',
+      stickyCtaText: 'Commence à gagner maintenant',
+      modalEyebrow: 'Avant de continuer',
+      modalTitle: 'Sélectionne <span style="color:var(--primary)">25+</span> lors de ton inscription',
+      modalBody: 'Cela débloque des paiements plus élevés sur TestStar.',
+      continueText: 'Continuer'
+    },
+    de: {
+      title: 'Verdiene Geld mit Spielen & dem Testen von Apps',
+      timerLabel: 'Bonus endet in&nbsp;',
+      trustText: 'Über 50.000 Nutzer vertrauen uns 🌍',
+      heroTitle: 'Verdiene Geld mit Spielen<br/><span>und dem Testen von Spielen</span>',
+      heroBody: 'Verwandle deine Bildschirmzeit in echtes Geld. Schließe dich Tausenden von Nutzern an, die jeden Tag Belohnungen verdienen.',
+      pill1: 'Sofortige Auszahlungen',
+      pill2: '100+ Spiele',
+      pill3: 'Tägliche Boni',
+      pill4: 'Sicher &amp; vertrauenswürdig',
+      topOffersLabel: 'Top-Angebote im Moment',
+      offer1Sub: 'Starte einen kostenlosen Probemonat',
+      hotBadge: 'HOT',
+      offer2Sub: 'Teste und erreiche Level 10',
+      offer3Sub: 'Teste und hinterlasse eine Bewertung',
+      proBadgeText: 'PROFI-TIPP',
+      proTitle: 'Schalte "<span class="y">höhere Auszahlungen</span>" frei<br/>',
+      proBody: 'Schließe 2–3 Einstiegsangebote ab, um höhere Auszahlungen freizuschalten und noch mehr zu verdienen!',
+      proPeriod: 'Pro Woche',
+      howLabel: 'So funktioniert es',
+      how1Title: 'Angebot wählen',
+      how1Desc: 'Wähle ein Einstiegsangebot und erledige den ersten Schritt.',
+      how2Title: 'Aufgaben erledigen',
+      how2Desc: 'Schalte nach 2–3 kurzen Aufgaben höhere Auszahlungen frei.',
+      how3Title: 'Auszahlen lassen',
+      how3Desc: 'Lass dir deine Belohnungen schnell auszahlen, sobald deine Einnahmen verfügbar sind.',
+      ratingText: '<strong>4.8/5</strong> aus über 251.000 Bewertungen',
+      stickyCtaText: 'Jetzt Geld verdienen',
+      modalEyebrow: 'Bevor du fortfährst',
+      modalTitle: 'Wähle bei der Anmeldung <span style="color:var(--primary)">25+</span>',
+      modalBody: 'Dadurch werden höhere Auszahlungen auf TestStar freigeschaltet.',
+      continueText: 'Weiter'
+    },
+    sv: {
+      title: 'Få betalt för att spela spel och testa appar',
+      timerLabel: 'Bonusen går ut om&nbsp;',
+      trustText: 'Betrodd av över 50 000 användare 🌍',
+      heroTitle: 'Få betalt för att spela<br/><span>och testa spel</span>',
+      heroBody: 'Förvandla din skärmtid till riktiga pengar. Gå med tusentals användare som får belöningar varje dag.',
+      pill1: 'Direkta utbetalningar',
+      pill2: '100+ spel',
+      pill3: 'Dagliga bonusar',
+      pill4: 'Säkert &amp; pålitligt',
+      topOffersLabel: 'Bästa erbjudandena just nu',
+      offer1Sub: 'Starta en gratis provmånad',
+      hotBadge: 'HET',
+      offer2Sub: 'Testa och nå nivå 10',
+      offer3Sub: 'Testa och lämna en recension',
+      proBadgeText: 'PROFFSTIPS',
+      proTitle: 'Lås upp "<span class="y">högre utbetalningar</span>"<br/>',
+      proBody: 'Slutför 2–3 starterbjudanden för att låsa upp högre utbetalningar och börja tjäna ännu mer!',
+      proPeriod: 'Per vecka',
+      howLabel: 'Så fungerar det',
+      how1Title: 'Välj ett erbjudande',
+      how1Desc: 'Välj ett starterbjudande och slutför det första steget.',
+      how2Title: 'Slutför uppgifter',
+      how2Desc: 'Lås upp högre utbetalningar efter 2–3 snabba uppgifter.',
+      how3Title: 'Få betalt',
+      how3Desc: 'Ta ut dina belöningar snabbt när dina intäkter är tillgängliga.',
+      ratingText: '<strong>4.8/5</strong> från över 251 000 recensioner',
+      stickyCtaText: 'Börja tjäna nu',
+      modalEyebrow: 'Innan du fortsätter',
+      modalTitle: 'Välj <span style="color:var(--primary)">25+</span> när du registrerar dig',
+      modalBody: 'Detta låser upp högre utbetalningar på TestStar.',
+      continueText: 'Fortsätt'
+    },
+    pl: {
+      title: 'Zarabiaj, grając i testując aplikacje',
+      timerLabel: 'Bonus wygasa za&nbsp;',
+      trustText: 'Zaufało nam ponad 50 000 użytkowników 🌍',
+      heroTitle: 'Zarabiaj, grając<br/><span>i testując gry</span>',
+      heroBody: 'Zamień czas przed ekranem na prawdziwe pieniądze. Dołącz do tysięcy użytkowników zdobywających nagrody każdego dnia.',
+      pill1: 'Natychmiastowe wypłaty',
+      pill2: '100+ gier',
+      pill3: 'Codzienne bonusy',
+      pill4: 'Bezpiecznie i pewnie',
+      topOffersLabel: 'Najlepsze oferty teraz',
+      offer1Sub: 'Rozpocznij darmowy miesiąc próbny',
+      hotBadge: 'HOT',
+      offer2Sub: 'Przetestuj i osiągnij poziom 10',
+      offer3Sub: 'Przetestuj i zostaw opinię',
+      proBadgeText: 'WSKAZÓWKA',
+      proTitle: 'Odblokuj "<span class="y">wyższe wypłaty</span>"<br/>',
+      proBody: 'Ukończ 2–3 oferty startowe, aby odblokować wyższe wypłaty i zacząć zarabiać jeszcze więcej!',
+      proPeriod: 'Tygodniowo',
+      howLabel: 'Jak to działa',
+      how1Title: 'Wybierz ofertę',
+      how1Desc: 'Wybierz ofertę startową i wykonaj pierwszy krok.',
+      how2Title: 'Wykonaj zadania',
+      how2Desc: 'Odblokuj wyższe wypłaty po 2–3 szybkich zadaniach.',
+      how3Title: 'Odbierz wypłatę',
+      how3Desc: 'Wypłać nagrody szybko, gdy tylko środki będą dostępne.',
+      ratingText: '<strong>4.8/5</strong> na podstawie ponad 251 tys. opinii',
+      stickyCtaText: 'Zacznij zarabiać teraz',
+      modalEyebrow: 'Zanim przejdziesz dalej',
+      modalTitle: 'Wybierz <span style="color:var(--primary)">25+</span> podczas rejestracji',
+      modalBody: 'To odblokuje wyższe wypłaty na TestStar.',
+      continueText: 'Kontynuuj'
+    },
+    da: {
+      title: 'Bliv betalt for at spille spil og teste apps',
+      timerLabel: 'Bonus udløber om&nbsp;',
+      trustText: 'Betroet af over 50.000 brugere 🌍',
+      heroTitle: 'Bliv betalt for at spille<br/><span>og teste spil</span>',
+      heroBody: 'Gør din skærmtid til rigtige penge. Slut dig til tusindvis af brugere, der optjener belønninger hver dag.',
+      pill1: 'Hurtige udbetalinger',
+      pill2: '100+ spil',
+      pill3: 'Daglige bonusser',
+      pill4: 'Sikkert &amp; pålideligt',
+      topOffersLabel: 'Bedste tilbud lige nu',
+      offer1Sub: 'Start en gratis prøvemåned',
+      hotBadge: 'HOT',
+      offer2Sub: 'Test og nå niveau 10',
+      offer3Sub: 'Test og skriv en anmeldelse',
+      proBadgeText: 'PRO TIP',
+      proTitle: 'Lås op for "<span class="y">højere udbetalinger</span>"<br/>',
+      proBody: 'Fuldfør 2–3 starttilbud for at låse op for højere udbetalinger og begynde at tjene endnu mere!',
+      proPeriod: 'Pr. uge',
+      howLabel: 'Sådan fungerer det',
+      how1Title: 'Vælg et tilbud',
+      how1Desc: 'Vælg et starttilbud og fuldfør det første trin.',
+      how2Title: 'Fuldfør opgaver',
+      how2Desc: 'Lås op for højere udbetalinger efter 2–3 hurtige opgaver.',
+      how3Title: 'Få udbetalt',
+      how3Desc: 'Hæv dine belønninger hurtigt, når din indtjening er tilgængelig.',
+      ratingText: '<strong>4.8/5</strong> fra over 251.000 anmeldelser',
+      stickyCtaText: 'Begynd at tjene nu',
+      modalEyebrow: 'Før du fortsætter',
+      modalTitle: 'Vælg <span style="color:var(--primary)">25+</span> ved tilmelding',
+      modalBody: 'Dette låser op for højere udbetalinger på TestStar.',
+      continueText: 'Fortsæt'
+    },
+    no: {
+      title: 'Få betalt for å spille spill og teste apper',
+      timerLabel: 'Bonusen utløper om&nbsp;',
+      trustText: 'Stolt på av over 50 000 brukere 🌍',
+      heroTitle: 'Få betalt for å spille<br/><span>og teste spill</span>',
+      heroBody: 'Gjør skjermtiden din om til ekte penger. Bli med tusenvis av brukere som tjener belønninger hver dag.',
+      pill1: 'Umiddelbare utbetalinger',
+      pill2: '100+ spill',
+      pill3: 'Daglige bonuser',
+      pill4: 'Trygt &amp; pålitelig',
+      topOffersLabel: 'Beste tilbud akkurat nå',
+      offer1Sub: 'Start en gratis prøvemåned',
+      hotBadge: 'HOT',
+      offer2Sub: 'Test og nå nivå 10',
+      offer3Sub: 'Test og legg igjen en anmeldelse',
+      proBadgeText: 'PROFFTIPS',
+      proTitle: 'Lås opp "<span class="y">høyere utbetalinger</span>"<br/>',
+      proBody: 'Fullfør 2–3 starttilbud for å låse opp høyere utbetalinger og begynne å tjene enda mer!',
+      proPeriod: 'Per uke',
+      howLabel: 'Slik fungerer det',
+      how1Title: 'Velg et tilbud',
+      how1Desc: 'Velg et starttilbud og fullfør det første trinnet.',
+      how2Title: 'Fullfør oppgaver',
+      how2Desc: 'Lås opp høyere utbetalinger etter 2–3 raske oppgaver.',
+      how3Title: 'Få betalt',
+      how3Desc: 'Ta ut belønningene dine raskt når inntektene er tilgjengelige.',
+      ratingText: '<strong>4.8/5</strong> fra over 251 000 anmeldelser',
+      stickyCtaText: 'Begynn å tjene nå',
+      modalEyebrow: 'Før du fortsetter',
+      modalTitle: 'Velg <span style="color:var(--primary)">25+</span> når du registrerer deg',
+      modalBody: 'Dette låser opp høyere utbetalinger på TestStar.',
+      continueText: 'Fortsett'
+    }
+  };
+
+  function getLocale(){
+    var params = new URLSearchParams(window.location.search);
+    var forced = (params.get('lang') || '').toLowerCase();
+    if (TRANSLATIONS[forced]) return forced;
+
+    var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    if (lang.indexOf('it') === 0) return 'it';
+    if (lang.indexOf('es') === 0) return 'es';
+    if (lang.indexOf('nl') === 0) return 'nl';
+    if (lang.indexOf('fr') === 0) return 'fr';
+    if (lang.indexOf('de') === 0) return 'de';
+    if (lang.indexOf('sv') === 0) return 'sv';
+    if (lang.indexOf('pl') === 0) return 'pl';
+    if (lang.indexOf('da') === 0) return 'da';
+    if (lang.indexOf('no') === 0 || lang.indexOf('nb') === 0 || lang.indexOf('nn') === 0) return 'no';
+
+    return 'en';
+  }
+
+  function applyTranslations(locale){
+    var t = TRANSLATIONS[locale] || TRANSLATIONS.en;
+    document.documentElement.lang = locale;
+    document.title = t.title;
+
+    Object.keys(t).forEach(function(id){
+      if (id === 'title') return;
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = t[id];
+    });
+  }
+
+  applyTranslations(getLocale());
+
+  var AFFILIATE_URL='https://montrk5.co.uk/?a=26472&c=56071&s1=eu';
+  var timerEl=document.getElementById('timer');
+  var seconds=20*60;
+  var modalOverlay=document.getElementById('modalOverlay');
+  var openModalBtn=document.getElementById('openModalBtn');
+  var modalClose=document.getElementById('modalClose');
+  var continueBtn=document.getElementById('continueBtn');
+  var offerCards=document.querySelectorAll('.offer-card');
+
+  function renderTimer(){
+    var m=String(Math.floor(seconds/60)).padStart(2,'0');
+    var s=String(seconds%60).padStart(2,'0');
+    timerEl.textContent=m+':'+s;
+  }
+  renderTimer();
+  setInterval(function(){ if(seconds>0){ seconds--; renderTimer(); } },1000);
+
+  function openModal(){ modalOverlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(){ modalOverlay.classList.remove('open'); document.body.style.overflow=''; }
+
+  openModalBtn.addEventListener('click',openModal);
+  modalClose.addEventListener('click',closeModal);
+  modalOverlay.addEventListener('click',function(e){ if(e.target===modalOverlay) closeModal(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+  continueBtn.addEventListener('click',function(){
+    var destination = AFFILIATE_URL;
+
+    if (typeof window.ttq !== 'undefined' && typeof window.ttq.track === 'function') {
+      window.ttq.track('ClickButton');
+      window.ttq.track('SubmitForm');
+    }
+
+    window.setTimeout(function(){
+      window.location.href = destination;
+    }, 250);
+  });
+  offerCards.forEach(function(card){ card.addEventListener('click', openModal); });
+})();
+</script>
+
+</body>
+</html>
